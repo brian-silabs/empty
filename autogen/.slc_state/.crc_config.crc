@@ -1,0 +1,19 @@
+#CRC Codes for initially generated config files -- do not modify!
+FreeRTOSConfig.h=668080823
+app_properties_config.h=-1164457435
+btl_interface_cfg.h=1583486805
+btl_interface_cfg_s2c4.h=-887046297
+dmadrv_config.h=1721329697
+nvm3_default_config.h=2103899018
+sl_board_control_config.h=205405711
+sl_clock_manager_oscillator_config.h=1032829714
+sl_clock_manager_tree_config.h=481267497
+sl_core_config.h=-1854422791
+sl_debug_swo_config.h=-178041412
+sl_device_init_dcdc_config.h=303593907
+sl_device_init_emu_config.h=-94662422
+sl_iostream_eusart_vcom_config.h=697027289
+sl_main_start_task_config.h=5881419
+sl_memory_manager_config.h=-1514202957
+sl_memory_manager_region_config.h=-793745704
+sl_mx25_flash_shutdown_eusart_config.h=-1933800066

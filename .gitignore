@@ -1,0 +1,8 @@
+# Simplicity Studio's copied SDK and local build products.
+/simplicity_sdk_*/
+/cmake_gcc/build/
+
+# Local IDE state.
+/.projectlinkstore
+/.uceditor/
+/.vscode/
