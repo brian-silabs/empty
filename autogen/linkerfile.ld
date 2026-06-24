@@ -36,12 +36,6 @@
 
 ENTRY(Reset_Handler)
 
-/* Fixed address of the empty_non_legal module descriptor. */
-SPLIT_INTERFACE_ADDRESS = 0x08100200;
-
-/* The bootloader owns this range through 0x080F6000. */
-BOOTLOADER_STORAGE_SLOT_START = 0x080A0000;
-
 SECTIONS
 {
 
@@ -258,8 +252,6 @@ heap_size = heap_limit - __HeapBase;
 
   linker_storage_begin = linker_storage_end - SIZEOF(.internal_storage);
   ASSERT((linker_storage_begin >= (__etext + SIZEOF(.data))), "FLASH memory overflowed !")
-  ASSERT((__etext + SIZEOF(.data)) <= BOOTLOADER_STORAGE_SLOT_START,
-         "empty application overlaps the bootloader storage slot !")
 
 
   app_flash_end = 0x8006000 + 0xfa000;
