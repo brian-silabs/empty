@@ -11,8 +11,8 @@
 
 #include <stdint.h>
 
-#define SPLIT_INTERFACE_ADDRESS     (0x08100200UL)
-#define SPLIT_INTERFACE_MAGIC       (0x53504C54UL) /* "SPLT" */
+#define SPLIT_INTERFACE_ADDRESS (0x08100000UL)
+#define SPLIT_INTERFACE_MAGIC (0x53504C54UL) /* "SPLT" */
 #define SPLIT_INTERFACE_ABI_VERSION (1U)
 
 typedef void (*split_init_fn_t)(void);
@@ -26,4 +26,4 @@ typedef struct {
   split_process_action_fn_t process_action;
 } split_interface_t;
 
-#endif  // SPLIT_INTERFACE_H
+#endif // SPLIT_INTERFACE_H
