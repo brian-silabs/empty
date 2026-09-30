@@ -4,5 +4,30 @@
 
 # Local IDE state.
 /.projectlinkstore
-/.uceditor/
 /.vscode/
+
+*.bak0
+*.bak
+.DS_Store/
+.DS_Store
+/cmake_gcc/*
+!/cmake_gcc/*_project.cmake
+.vscode/
+
+__pycache__/
+*.pyc
+
+*.bin
+*.hex
+*.elf
+*.map
+*.s37
+*.gbl
+
+.uceditor/
+.projectlinkstore
+autogen/sbom/
+.silabsExtContext
+
+vscode.conf
+/.codex/

@@ -20,10 +20,13 @@ readme:
 - path: readme.md
 source:
 - path: app.c
+- path: crypto_cli.c
 include:
 - path: .
   file_list:
   - path: app.h
+  - path: crypto_cli.h
+  - path: split_interface.h
 sdk:
   vendor: null
   id: simplicity_sdk
@@ -34,6 +37,9 @@ component:
 - id: EFR32MG24B210F1536IM48
 - id: bootloader_interface
 - id: brd4186c
+- instance:
+  - vcom
+  id: cli
 - id: clock_manager
 - id: device_init
 - id: freertos
@@ -42,7 +48,110 @@ component:
   id: iostream_eusart
 - id: iostream_retarget_stdio
 - id: nvm3_default
+- id: psa_crypto_aes
+- id: se_manager_crypto
 - id: sl_main
+autoselected_components:
+- id: atomic
+- id: bit
+- id: board_control
+- id: bootloader_app_properties
+- id: bootloader_interface_s2
+- id: brd4002a
+- id: brd4186c_config
+- id: cli_core
+- id: clock_manager_init_hal_s2
+- id: clock_manager_runtime
+- id: clock_manager_runtime_hal_s2
+- id: cmsis_common
+- id: cmsis_core
+- id: cmsis_os2_ext_task_register
+- id: cmsis_rtos2_headers
+- id: cmsis_rtos2_init
+- id: cmsis_rtos2_tick
+- id: code_classification
+- id: component_catalog
+- id: configuration_over_swo
+- id: debug_swo
+- id: device_clock
+- id: device_clock_hal
+- id: device_gpio
+- id: device_i2c
+- id: device_init_core
+- id: device_init_dcdc
+- id: device_init_emu
+- id: device_manager
+- id: device_peripheral
+- id: device_peripheral_hal
+- id: dmadrv
+- id: dmadrv_core
+- id: ecode
+- id: emlib_chip
+- id: emlib_cmu
+- id: emlib_common
+- id: emlib_core
+- id: emlib_emu
+- id: emlib_eusart
+- id: emlib_gpio
+- id: emlib_ldma
+- id: emlib_msc
+- id: emlib_syscfg
+- id: emlib_system
+- id: enum
+- id: event_handler
+- id: freertos_heap_3
+- id: freertos_kernel_cortexm
+- id: gpio
+- id: hal_common
+- id: hal_eusart
+- id: hal_gpio
+- id: hal_prs
+- id: interrupt_manager
+- id: interrupt_manager_cortexm
+- id: iostream
+- id: iostream_eusart_core
+- id: iostream_uart_common
+- id: mbedtls_config
+- id: mbedtls_core
+- id: mbedtls_platform_dynamic_memory_allocation_config_default
+- id: mbedtls_slcrypto
+- id: mbedtls_slcrypto_driver
+- id: mbedtls_source
+- id: mbedtls_threading_alt_cmsis_rtos2
+- id: memory_manager
+- id: memory_manager_pool
+- id: memory_manager_region
+- id: memory_manager_retention_control
+- id: memory_manager_retention_control_hal
+- id: mx25_flash_shutdown_eusart
+- id: nvm3_default_config
+- id: nvm3_default_flash_backend
+- id: nvm3_optimization_disable
+- id: nvm3_source
+- id: psa_crypto
+- id: psa_crypto_common
+- id: psa_crypto_config
+- id: psa_crypto_source
+- id: psa_crypto_trng
+- id: psa_driver
+- id: psa_driver_common
+- id: psa_se_driver
+- id: se_manager
+- id: se_manager_config
+- id: se_manager_mailbox
+- id: sl_assert
+- id: sl_common
+- id: sl_core
+- id: sl_main_init
+- id: sl_main_kernel
+- id: sl_main_memory_init
+- id: sl_main_process_action
+- id: sl_string
+- id: sli_psec_osal
+- id: slist
+- id: status
+- id: trustzone_unaware
+- id: udelay
 define:
 - name: DEBUG_EFM
 template_contribution:
