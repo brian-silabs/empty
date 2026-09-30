@@ -49,6 +49,7 @@ component:
 - id: iostream_retarget_stdio
 - id: nvm3_default
 - id: psa_crypto_aes
+- id: psa_crypto_cipher_ecb
 - id: se_manager_crypto
 - id: sl_main
 autoselected_components:

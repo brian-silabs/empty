@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <model:MDescriptors xmlns:model="http://www.silabs.com/ss/Studio.ecore">
   <descriptors name="empty">
-    <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.sisdk:2025.6.3._-20292436532373502478"/>
+    <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.sisdk:2025.6.3._-15994805522373502478"/>
     <properties key="universalConfig.relativeWorkspacePath" value="../empty.slcw"/>
     <properties key="universalConfig.generationDirectory" value=""/>
     <properties key="universalConfig.toolchainCompatibility" value="iar gcc"/>
@@ -14,6 +14,6 @@
     <properties key="projectCommon.importModeId" value="COPY"/>
     <properties key="universalConfig.compSelProjInstanceId" value="1782219653697"/>
     <properties key="universalConfig.filteredToolchains" value="iar gcc"/>
-    <properties key="universalConfig.ucProjectCacheState" value="799466489"/>
+    <properties key="universalConfig.ucProjectCacheState" value="-31028796"/>
   </descriptors>
 </model:MDescriptors>

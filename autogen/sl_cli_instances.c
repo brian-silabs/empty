@@ -87,17 +87,17 @@ void sl_cli_instances_init(void)
   instance_parameters.loop_delay_ms = SL_CLI_VCOM_TASK_LOOP_DELAY_MS;
 #endif
   sl_cli_instance_init(sl_cli_vcom_handle, &instance_parameters);
-
+  
 }
 
 #if !defined(SL_CATALOG_KERNEL_PRESENT)
 bool sl_cli_instances_is_ok_to_sleep(void)
 {
-
+  
   if (sl_cli_is_ok_to_sleep(sl_cli_vcom_handle) == false) {
     return false;
   }
-
+  
 
   return true;
 }
@@ -110,7 +110,7 @@ sl_iostream_t *previous = sl_iostream_get_default();
   // Handle vcom
   sl_iostream_set_default(sl_cli_vcom_handle->iostream_handle);
   sl_cli_tick_instance(sl_cli_vcom_handle);
-
+  
   sl_iostream_set_default(previous);
 #endif // SL_CLI_TICK_ENABLE
 }
