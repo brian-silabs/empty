@@ -10,11 +10,14 @@
 #include "crypto_cli.h"
 #include "em_core.h"
 #include "em_device.h"
-#include "sl_interrupt_manager.h"
 
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+
+#define VECTOR_TABLE_ENTRIES (16U + EXT_IRQ_COUNT)
+
+static uint32_t ram_vector_table[VECTOR_TABLE_ENTRIES] __ALIGNED(512);
 
 static const split_interface_t *const non_legal =
   (const split_interface_t *)SPLIT_INTERFACE_ADDRESS;
@@ -37,12 +40,14 @@ static sl_status_t install_non_legal_radio_isrs(void)
   const uintptr_t module_flash_start = 0x08100100UL;
   const uintptr_t module_flash_end = 0x08180000UL;
   const uint32_t required_entries = 16U + EXT_IRQ_COUNT;
+  const uint32_t *host_vector_table = (const uint32_t *)(uintptr_t)SCB->VTOR;
 
   if ((table_address < module_flash_start)
       || (table_address >= module_flash_end)
       || ((table_address & 0x1ffU) != 0U)
       || (non_legal->vector_table_entries < required_entries)
-      || ((table_address + (required_entries * sizeof(uint32_t))) > module_flash_end)) {
+      || ((table_address + (required_entries * sizeof(uint32_t))) > module_flash_end)
+      || (((uintptr_t)host_vector_table & 0x1ffU) != 0U)) {
     return SL_STATUS_INVALID_PARAMETER;
   }
 
@@ -50,6 +55,10 @@ static sl_status_t install_non_legal_radio_isrs(void)
   __disable_irq();
 
   sl_status_t status = SL_STATUS_OK;
+  for (uint32_t i = 0U; i < required_entries; ++i) {
+    ram_vector_table[i] = host_vector_table[i];
+  }
+
   for (size_t i = 0U; i < (sizeof(radio_irqs) / sizeof(radio_irqs[0])); ++i) {
     const IRQn_Type irqn = radio_irqs[i];
     const uintptr_t handler = (uintptr_t)non_legal->vector_table[16U + (uint32_t)irqn];
@@ -62,11 +71,13 @@ static sl_status_t install_non_legal_radio_isrs(void)
       break;
     }
 
-    status = sl_interrupt_manager_set_irq_handler(irqn,
-      (sl_interrupt_manager_irq_handler_t)handler);
-    if (status != SL_STATUS_OK) {
-      break;
-    }
+    ram_vector_table[16U + (uint32_t)irqn] = (uint32_t)handler;
+  }
+
+  if (status == SL_STATUS_OK) {
+    SCB->VTOR = (uint32_t)(uintptr_t)ram_vector_table;
+    __DSB();
+    __ISB();
   }
 
   if (primask == 0U) {
