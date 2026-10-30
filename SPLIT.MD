@@ -55,6 +55,9 @@ and flashed independently. The host must *not* call the module's
 adding RAIL, remove unused startup and platform ownership from
 `empty_non_legal` so `empty` remains the owner of clocking, FreeRTOS,
 interrupts, and board initialization.
+The split module initializes its own `.data`, RAM functions and `.bss` by
+consuming its linker copy/zero tables before calling RAIL or crypto code.
+Preserve those table entries when regenerating the module linker script.
 
 ## Running the PoC
 
