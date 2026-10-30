@@ -22,7 +22,7 @@ static uint32_t ram_vector_table[VECTOR_TABLE_ENTRIES] __ALIGNED(512);
 static const split_interface_t *const non_legal =
   (const split_interface_t *)SPLIT_INTERFACE_ADDRESS;
 
-#define NON_LEGAL_PROCESS_STACK_BYTES 8192U
+#define NON_LEGAL_PROCESS_STACK_BYTES 2048U
 static StackType_t non_legal_process_stack[
   NON_LEGAL_PROCESS_STACK_BYTES / sizeof(StackType_t)];
 static StaticTask_t non_legal_process_tcb;
