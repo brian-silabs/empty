@@ -15,7 +15,7 @@
 
 #define SPLIT_INTERFACE_ADDRESS (0x08100000UL)
 #define SPLIT_INTERFACE_MAGIC (0x53504C54UL) /* "SPLT" */
-#define SPLIT_INTERFACE_ABI_VERSION (2U)
+#define SPLIT_INTERFACE_ABI_VERSION (3U)
 
 /* Call init once, before starting callers. All module calls are synchronous.
  * Serialize CCM/test calls in the host; the module has no RTOS of its own. */
@@ -47,6 +47,9 @@ typedef struct {
   split_ccm_fn_t ccm_encrypt;
   split_ccm_fn_t ccm_decrypt;
   split_radio_test_fn_t radio_test;
+  /* Module vectors for installing peripheral ISR entries in the host table. */
+  const uint32_t *vector_table;
+  uint32_t vector_table_entries;
 } split_interface_t;
 
 #endif // SPLIT_INTERFACE_H

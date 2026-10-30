@@ -26,12 +26,15 @@ the fixed address `0x08100000`. The non-legal FLASH region starts at
 `0x08100100`, after the 256-byte descriptor region; the vector table is aligned
 by the linker (currently `0x08100200`).
 
-ABI version 2 contains:
+ABI version 3 contains:
 
 - `init()` — called once by `empty` from `app_init()`.
 - `process_action()` — called every second from a host FreeRTOS task.
 - `ccm_encrypt()` / `ccm_decrypt()` — synchronous AES-128 CCM through RADIOAES.
 - `radio_test()` — Green Power known-answer and bad-tag tests in the module.
+- `vector_table` / `vector_table_entries` — the module's own linked vector
+  table. The host installs the selected radio IRQ entries through the
+  interrupt manager; handler addresses are never hard-coded.
 
 Before calling any function, the host validates the descriptor magic, ABI
 version, size, and that all function pointers are present. This is enough
