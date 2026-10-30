@@ -33,8 +33,9 @@ volatile uint32_t non_legal_process_stack_free_bytes;
 static sl_status_t install_non_legal_radio_isrs(void)
 {
   static const IRQn_Type radio_irqs[] = {
-    RFECA0_IRQn, RFECA1_IRQn, FRC_PRI_IRQn, BUFC_IRQn,
-    PROTIMER_IRQn, RAC_SEQ_IRQn, MODEM_IRQn,
+    AGC_IRQn, BUFC_IRQn, FRC_PRI_IRQn, FRC_IRQn, MODEM_IRQn,
+    PROTIMER_IRQn, RAC_RSM_IRQn, RAC_SEQ_IRQn, SYNTH_IRQn,
+    HOSTMAILBOX_IRQn, RFECA0_IRQn, RFECA1_IRQn,
   };
   const uintptr_t table_address = (uintptr_t)non_legal->vector_table;
   const uintptr_t module_flash_start = 0x08100100UL;
