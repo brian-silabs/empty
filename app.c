@@ -4,6 +4,8 @@
  ******************************************************************************/
 
 #include "cmsis_os2.h"
+#include "FreeRTOS.h"
+#include "task.h"
 #include "split_interface.h"
 #include "crypto_cli.h"
 #include "em_core.h"
@@ -16,6 +18,14 @@
 
 static const split_interface_t *const non_legal =
   (const split_interface_t *)SPLIT_INTERFACE_ADDRESS;
+
+#define NON_LEGAL_PROCESS_STACK_BYTES 8192U
+static StackType_t non_legal_process_stack[
+  NON_LEGAL_PROCESS_STACK_BYTES / sizeof(StackType_t)];
+static StaticTask_t non_legal_process_tcb;
+
+/* Inspect in the debugger; osThreadGetStackSpace reports bytes. */
+volatile uint32_t non_legal_process_stack_free_bytes;
 
 static sl_status_t install_non_legal_radio_isrs(void)
 {
@@ -84,6 +94,7 @@ static void non_legal_process_task(void *argument)
 
   for (;;) {
     (void)non_legal->process_action();
+    non_legal_process_stack_free_bytes = osThreadGetStackSpace(osThreadGetId());
     osDelay(1000U);
   }
 }
@@ -92,7 +103,10 @@ void app_init(void)
 {
   static const osThreadAttr_t process_task_attributes = {
     .name = "non_legal_process",
-    .stack_size = 8192U,
+    .stack_mem = non_legal_process_stack,
+    .stack_size = sizeof(non_legal_process_stack),
+    .cb_mem = &non_legal_process_tcb,
+    .cb_size = sizeof(non_legal_process_tcb),
     .priority = osPriorityNormal,
   };
 

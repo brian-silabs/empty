@@ -82,6 +82,10 @@ never run. It initializes protocol crypto and seeds RADIOAES masking before the
 legal SE workload starts. The SDK uses SE entropy for this initial mask seed;
 subsequent CCM operations use RADIOAES. Do not add another RTOS to the module.
 The host heap is 16 KiB to accommodate the CLI, worker and existing tasks.
+The module process task owns an 8 KiB statically allocated stack in the legal
+image's RAM; `non_legal_process_stack_free_bytes` exposes its FreeRTOS high-water
+mark in bytes for debugger inspection. This is separate from the Cortex-M
+exception/main stack used by interrupt handlers.
 
 Commands on the default VCOM CLI:
 
